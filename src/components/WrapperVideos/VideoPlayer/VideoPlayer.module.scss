@@ -1,0 +1,153 @@
+
+$sizeVideo: calc(450px + ((100vw - 768px) / 1152) * 100);
+:export {
+    sizeVideo: $sizeVideo;
+}
+
+.container {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.video-container { 
+    border-radius: 10px;
+    display: flex;
+    justify-content: unset;
+    align-items: flex-end;
+    gap: 20px;
+    &-height {
+        height: $sizeVideo;
+        .video-container {
+            height: 100%;
+        }
+    }
+
+    &-width {
+        .video-container {
+            width: $sizeVideo;
+            // width: 100%;
+        }
+    }
+}
+
+
+
+.action-icon-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    max-width: 48px;
+    justify-content: flex-end;
+}
+
+.action-icon-container > button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-icon-btn {
+    background-color: var(--white);
+}
+
+.value {
+    margin: 10px 0px 10px 0px;
+    font-weight: bold;
+    color: #6a6a6a;
+}
+
+.heart-icon,
+.comment-icon,
+.share-icon {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(22, 24, 35, 0.06);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(22, 24, 35, .1);
+        transition: 200ms;
+    }
+}
+
+.video-container {
+    // height: 100%;
+    width: fit-content;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+        .controls {
+            .btn-play {
+                opacity: 1;
+            }
+            .volume {
+                opacity: 1;
+            }
+            .duration {
+                opacity: 1;
+            }
+        }
+    }
+
+    video {
+        display: block;
+        height: auto;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .controls {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 10px 12px;
+
+        .btn-play {
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+            background-color: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            position: absolute;
+            bottom: 38px;
+            left: 12px;
+        }
+
+        .volume {
+            position: absolute;
+            bottom: 26px;
+            right: 12px;
+            opacity: 0;
+        }
+
+        .duration {
+            display: flex;
+            justify-content: unset;
+            align-items: flex-end;
+            gap: 15px;
+
+            opacity: 0;
+            transition: all 0.3s ease;
+
+            .time {
+                color: var(--white);
+                font-size: 1rem;
+            }
+        }
+    }
+}

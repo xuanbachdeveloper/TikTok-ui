@@ -1,0 +1,14 @@
+.footer-copyright {
+    font-size: 12px;
+    color: rgb(134, 132, 132);
+    &:hover {
+        text-decoration: underline;
+    }
+    margin: 7px 5px 0px 5px;
+}
+
+.wrapper {
+    border-top: 1px solid rgb(229, 229, 229);
+    margin-top: 10px;
+    padding: 5px 0px 5px 6px;
+}

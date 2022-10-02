@@ -1,0 +1,5 @@
+@use '../../components/GlobalStyles/scss/' as *;
+
+.wrapper {
+    @include flex(unset, unset);
+}

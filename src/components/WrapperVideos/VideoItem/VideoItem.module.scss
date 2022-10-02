@@ -1,0 +1,55 @@
+.wrapper {
+    border-top: 1px solid #e3e3e4;
+    max-height: fit-content;
+    padding-top: 45px;
+    max-width: 620px;
+}
+
+.user-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.nickname {
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.video-music{
+    margin: 3px 0px 3px 0px;
+    &:hover{
+        text-decoration: underline;
+        
+    }
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    margin-left: 70px;
+}
+
+.fullname {
+    margin-left: 3px;
+    font-size: 14px;
+}
+
+.info {
+    max-width: 700px;
+    margin-top: -90px;
+}
+
+.btn-follow {
+    position: relative;
+    right: -530px;
+    top: -55px;
+}
+
+
+
+

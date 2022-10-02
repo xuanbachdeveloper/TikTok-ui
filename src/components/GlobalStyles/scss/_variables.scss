@@ -1,0 +1,40 @@
+$tableWidth: 992px;
+$mobileWidth: 576px;
+$contentWidth: 1150px;
+
+$heightHeader: 60px;
+$widthSidebar: 356px;
+
+$bgColor: var(--white);
+$darkColor: #161823;
+$subTextColor: rgba(
+    $color: $darkColor,
+    $alpha: 0.5,
+);
+
+$mainColor: #fe2c55;
+$safeColor: #20d5ec;
+
+$grayColor: #f1f1f2;
+
+$blackColor: #000;
+$whiteColor: var(--white);
+
+$borderColor: rgba(
+    $color: $darkColor,
+    $alpha: 0.12,
+);
+
+$boxShadow: 0px 2px 8px
+    rgba(
+        $color: $blackColor,
+        $alpha: 0.06,
+    );
+
+$fontFamily: 'IBM Plex Sans', 'SofiaPro', sans-serif;
+$titleUserNameFontFamily: 'SofiaPro', sans-serif;
+
+:export {
+    tableWidth: $tableWidth;
+    mainColor: $mainColor;
+}

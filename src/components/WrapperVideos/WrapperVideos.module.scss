@@ -1,0 +1,10 @@
+@use '../GlobalStyles/scss/' as *;
+
+.wrapperVideos {
+    display: flex;
+    flex-direction: column;
+}
+.loading-icon {
+    width: 100%;
+    @include flex(center, unset);
+}

@@ -1,0 +1,88 @@
+
+
+.wrapper {
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+        .progress {
+            opacity: 1;
+            transition: 0.2s;
+        }
+    }
+
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s;
+    }
+
+    .progress {
+        width: 48px;
+        flex: 1;
+        height: 2px;
+        position: relative;
+        transform-origin: top left;
+        transform: rotate(-90deg) translate(40px, 20px);
+        opacity: 0;
+
+        &::after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background-color: rgba($color: var(--white), $alpha: 0.3);
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
+        &::before {
+            content: '';
+            width: 74px;
+            height: 24px;
+            border-radius: 32px;
+            background-color: rgba($color: #000, $alpha: 0.34);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .range {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 10;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0;
+        }
+    }
+
+    .progress_bar {
+        width: 100%;
+        height: 2px;
+        background-color: var(--white);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0.2s;
+    }
+
+    .progress_circle {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background-color: var(--white);
+        border-radius: 50%;
+        top: 50%;
+        margin-left: 6px;
+        transform: translate(-6px, -50%);
+        transition: 0.2s;
+    }
+}

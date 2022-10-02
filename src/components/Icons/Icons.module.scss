@@ -1,0 +1,90 @@
+.redhole-circle-shadow {
+    stroke-width: 0;
+    r: 36px;
+    cy: 99px;
+    fill: #fe2c55;
+    cx: 128px;
+    -webkit-animation: animation-red-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    animation: animation-red-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    fill: #000;
+}
+
+.greenhole-circle-shadow {
+    stroke-width: 0;
+    r: 36px;
+    cy: 99px;
+    fill: #3af2ff;
+    cx: 60px;
+    -webkit-animation: animation-green-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    animation: animation-green-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    fill: #000;
+}
+
+.tiktok-circle {
+    stroke-width: 0;
+    r: 36px;
+    cy: 99px;
+    fill: #0f0f0f;
+    cx: 60px;
+    -webkit-animation: animation-green-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    animation: animation-green-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+}
+
+.green-circle {
+    stroke-width: 0;
+    r: 36px;
+    cy: 99px;
+    fill: #3af2ff;
+    cx: 60px;
+    -webkit-animation: animation-green-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    animation: animation-green-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+}
+
+.red-circle {
+    stroke-width: 0;
+    r: 36px;
+    cy: 99px;
+    fill: #fe2c55;
+    cx: 128px;
+    -webkit-animation: animation-red-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+    animation: animation-red-circle 1s cubic-bezier(0.05, 0, 1, 1) infinite;
+}
+
+@keyframes animation-red-circle {
+    25% {
+        cx: 100px;
+        r: 24px;
+    }
+    50% {
+        cx: 60px;
+        r: 36px;
+    }
+    75% {
+        cx: 100px;
+        r: 43.199999999999996px;
+    }
+    100% {
+        cx: 140px;
+        r: 36px;
+    }
+}
+
+@keyframes animation-green-circle {
+    25% {
+        cx: 100px;
+        r: 43.199999999999996px;
+    }
+
+    50% {
+        cx: 140px;
+        r: 36px;
+    }
+    75% {
+        cx: 100px;
+        r: 21.599999999999998px;
+    }
+    100% {
+        cx: 60px;
+        r: 36px;
+    }
+}

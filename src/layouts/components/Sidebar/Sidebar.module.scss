@@ -1,0 +1,51 @@
+.wrapper {
+    width: var(--default-layout-sidebar-width);
+    padding: 20px 0 26px 8px;
+    margin-left: -18px;
+    box-shadow: 1px rgba(0, 0, 0, 0.06);
+    overflow-y: hidden;
+    // -------------
+    height: calc(100vh - var(--default-layout-header-height));
+    position: fixed;
+    // -----------
+
+    &:hover {
+        overflow-y: scroll;
+    }
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+    color: var(--white);
+}
+
+.text-primary {
+    color: rgba(22, 24, 35, 0.5);
+    font-size: 16px;
+    line-height: 22px;
+    margin: 10px;
+    min-width: 100%;
+}
+
+.primary-btn {
+    color: var(--primary);
+    background-color: var(--white);
+    border-color: var(--primary);
+    min-width: 90%;
+    min-height: 48px;
+    margin: 0px 10px 10px 10px;
+
+    &:hover {
+        border-color: var(--primary);
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), var(--white);
+    }
+}
+
+.currentUser-login {
+    border-top: 1px solid rgb(229, 229, 229);
+    margin-top: 10px;
+    padding: 5px 0px 5px 0px;
+}
