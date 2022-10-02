@@ -55,9 +55,9 @@ const MENU_ITEMS = [
     },
 ];
 
-function Header() {
-    localStorage.setItem('currentUser', true);
-    const currentUser = true;
+function Header({currentUser}) {
+
+
     // Handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -92,6 +92,8 @@ function Header() {
             separate: true,
         },
     ];
+
+
 
     return (
         <header className={cx('wrapper')}>
@@ -147,7 +149,7 @@ function Header() {
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
                             </button>
                         )}
-                    </Menu>
+                        </Menu>
                 </div>
             </div>
         </header>

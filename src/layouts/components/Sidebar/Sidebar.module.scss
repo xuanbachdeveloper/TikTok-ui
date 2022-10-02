@@ -4,6 +4,7 @@
     margin-left: -18px;
     box-shadow: 1px rgba(0, 0, 0, 0.06);
     overflow-y: hidden;
+    overflow-x: hidden;
     // -------------
     height: calc(100vh - var(--default-layout-header-height));
     position: fixed;
@@ -34,7 +35,7 @@
     color: var(--primary);
     background-color: var(--white);
     border-color: var(--primary);
-    min-width: 90%;
+    width: 320px;
     min-height: 48px;
     margin: 0px 10px 10px 10px;
 
@@ -47,5 +48,6 @@
 .currentUser-login {
     border-top: 1px solid rgb(229, 229, 229);
     margin-top: 10px;
-    padding: 5px 0px 5px 0px;
+    padding: 5px 10px 5px 0px;
+
 }

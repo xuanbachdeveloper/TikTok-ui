@@ -3,6 +3,7 @@
     max-height: fit-content;
     padding-top: 45px;
     max-width: 620px;
+    margin-top: -1px;
 }
 
 .user-avatar {
@@ -12,16 +13,15 @@
 }
 
 .nickname {
-    &:hover{
+    &:hover {
         text-decoration: underline;
     }
 }
 
-.video-music{
+.video-music {
     margin: 3px 0px 3px 0px;
-    &:hover{
+    &:hover {
         text-decoration: underline;
-        
     }
 }
 
@@ -44,12 +44,18 @@
     margin-top: -90px;
 }
 
-.btn-follow {
+.btn-follow,
+.btn-unfollow {
     position: relative;
     right: -530px;
     top: -55px;
 }
 
-
-
-
+.content {
+    a {
+        font-weight: 600;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

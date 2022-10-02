@@ -41,7 +41,7 @@ function SuggestedAccounts({ label}) {
             ))}
 
             <p className={cx('more-btn')} onClick={handeLoadMore}>
-            {seeMore ? '   See less' : 'See more'}
+            {seeMore ? '   See less' : 'See all'}
             </p>
         </div>
     );

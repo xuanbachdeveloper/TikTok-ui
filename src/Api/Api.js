@@ -25,6 +25,15 @@ const Api = {
         const url = 'videos'
         return axiosClient.get(url, params)
     },
+    followAccount: (params) => {
+        const url = 'users/' + params + '/follow'
+        return axiosClient.post(url)
+    },
+    unFollowAccount: (params) => {
+        const url = 'users'
+        return axiosClient.post(url, params)
+    },
+    
 }
 
 export default Api

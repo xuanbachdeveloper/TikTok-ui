@@ -67,6 +67,16 @@
     }
 }
 
+.outline_black {
+    color: #000;
+    border-color: currentColor;
+
+    &:hover {
+        border-color: currentColor;
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
 .text {
     &:hover {
         text-decoration: underline;

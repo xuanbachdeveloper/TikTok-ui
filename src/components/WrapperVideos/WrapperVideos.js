@@ -22,6 +22,7 @@ function WrapperVideos() {
 
     useEffect(() => {
         getVideos();
+        // eslint-disable-next-line
     }, []);
 
     return (
