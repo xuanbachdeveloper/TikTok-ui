@@ -18,8 +18,7 @@ import Footer from '~/components/Footer';
 
 const cx = classNames.bind(styles);
 
-function Sidebar( {currentUser} ) {
-
+function Sidebar({ currentUser }) {
     return (
         <aside className={cx('wrapper')}>
             <Menu>

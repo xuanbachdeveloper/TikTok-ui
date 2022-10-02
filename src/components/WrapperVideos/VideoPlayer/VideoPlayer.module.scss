@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 $sizeVideo: calc(450px + ((100vw - 768px) / 1152) * 100);
 :export {
@@ -30,8 +31,9 @@ $sizeVideo: calc(450px + ((100vw - 768px) / 1152) * 100);
     }
 }
 
-
-
+.value {
+    font-family: 'Roboto', sans-serif;
+}
 .action-icon-container {
     display: flex;
     flex-direction: column;
