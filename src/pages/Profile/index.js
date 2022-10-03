@@ -13,6 +13,8 @@ import { LinkIcon, LockIcon, LockIconOutLine, UnFollowIcon } from '~/components/
 const cx = classNames.bind(styles);
 
 function Profile() {
+    const [state, setState] = useState(false);
+    setTimeout(()=>setState(true), 300)
     const { nickname } = useParams();
     const [data, setData] = useState({});
 
@@ -44,8 +46,9 @@ function Profile() {
     };
     return (
         <div className={cx('user-page')}>
+           {state === true ? <div>
             <div className={cx('header')}>
-                <div className={cx('info')}>
+                 <div className={cx('info')}>
                     <Image className={cx('userAvatar')} src={data.avatar} />
                     <div className={cx('title')}>
                         <h3 className={cx('nickname')}>
@@ -68,7 +71,7 @@ function Profile() {
                             </Button>
                         )}
                     </div>
-                </div>
+                </div> 
                 <h2 className={cx('conuter')}>
                     <div className={cx('number')}>
                         <strong>{data.followings_count}</strong>
@@ -148,6 +151,7 @@ function Profile() {
                     )}
                 </div>
             </div>
+        </div>: <></>}
         </div>
     );
 }
