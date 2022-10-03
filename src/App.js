@@ -4,7 +4,7 @@ import { publicRoutes } from '~/routes';
 import DefaultLayout from '~/layouts';
 
 function App() {
-    localStorage.setItem('currentUser', true);
+    localStorage.setItem('currentUser', false);
     return (
         <Router>
             <div className="App">
