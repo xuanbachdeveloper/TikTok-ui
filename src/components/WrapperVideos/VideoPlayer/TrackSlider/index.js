@@ -1,1 +1,1 @@
-export { default } from './TrackSlider.js'
+export { default } from './TrackSlider.js';

@@ -1,4 +1,4 @@
-import Api from '~/Api/Api'
+import Api from '~/Api/Api';
 
 export const getSuggested = async (page, perPage) => {
     try {
@@ -7,12 +7,12 @@ export const getSuggested = async (page, perPage) => {
                 page,
                 per_page: perPage,
             },
-        })
-        return res.data
+        });
+        return res.data;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
 
 export const getFollowingsList = async (page) => {
     try {
@@ -20,21 +20,18 @@ export const getFollowingsList = async (page) => {
             params: {
                 page,
             },
-        })
-        return res.data
+        });
+        return res.data;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
 
 export const getUser = async (nickname) => {
     try {
-        const res = await Api.getAnUser(nickname)
-        return res.data
+        const res = await Api.getAnUser(nickname);
+        return res.data;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
-
-
-
+};

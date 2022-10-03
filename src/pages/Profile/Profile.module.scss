@@ -1,0 +1,175 @@
+@use '../../components/GlobalStyles/scss/' as *;
+
+$sizeBtn: 36px;
+
+.user-page {
+    padding: 32px 0px 0px 0px;
+    .header {
+        position: relative;
+        margin-bottom: 20px;
+        max-width: 624px;
+        padding-right: 92px;
+
+        .info {
+            display: flex;
+            gap: 20px;
+            .userAvatar {
+                border-radius: 100%;
+                width: 130px;
+                height: 130px;
+            }
+            .title {
+                .nickname {
+                    font-size: 3.2rem;
+                    font-weight: 700;
+                    margin-bottom: 5px;
+                    line-height: 3.8rem;
+                    & > * ~ * {
+                        margin-left: 5px;
+                    }
+                }
+
+                .username {
+                    font-size: 1.8rem;
+                    font-weight: 600;
+                    line-height: 2.5rem;
+                    margin-bottom: 16px;
+                }
+
+                .btns {
+                    @include flex(unset, center);
+                    gap: 8px;
+                    .btn-ib {
+                        font-size: 1.8rem;
+                        min-width: 164px;
+                        height: $sizeBtn;
+                        box-sizing: border-box;
+                    }
+
+                    .btn-unfollow {
+                        border: 1px solid $borderColor;
+                        width: $sizeBtn;
+                        height: $sizeBtn;
+                        span {
+                            @include flex(center, center);
+                        }
+                    }
+                }
+
+                .btn-follow {
+                    min-width: 208px;
+                    font-size: 1.8rem;
+                    height: $sizeBtn;
+                }
+            }
+        }
+        .conuter {
+            @include flex(unset, center);
+            gap: 20px;
+            margin-top: 22px;
+            .number {
+                font-size: 1.8rem;
+                font-weight: 600;
+                line-height: 2.5rem;
+                @include flex(unset, center);
+
+
+                span {
+                    font-size: 1.6rem;
+                    font-weight: 400;
+                    line-height: 2.2rem;
+                    margin-left: 6px;
+                }
+            }
+        }
+
+        .desc {
+            // font-size: 1.6rem;
+            line-height: 2.2rem;
+            font-weight: 400;
+            margin-top: 10px;
+        }
+
+        .links {
+            font-weight: 600;
+            color: $darkColor;
+            margin-top: 5px;
+            a {
+                @include flex(unset, center);
+            }
+        }
+    }
+
+    .main {
+        .tabs {
+            @include flex(stretch, stretch);
+            margin-bottom: 8px;
+            width: 460px;
+            position: relative;
+
+            .tab {
+                @include flex(center, center);
+                gap: 8px;
+                flex: 1;
+                height: 44px;
+                font-weight: 600;
+                font-size: 1.8rem;
+                line-height: 2.5rem;
+                text-align: center;
+                cursor: pointer;
+                color: rgba($color: $darkColor, $alpha: 0.5);
+                border-bottom: 1px solid rgba($color: $darkColor, $alpha: 0.2);
+
+                &.active {
+                    color: $darkColor;
+                }
+            }
+
+            .bottom-line {
+                position: absolute;
+                width: 50%;
+                height: 2px;
+                background: rgba(22, 24, 35, 1);
+                left: 0;
+                bottom: 0;
+                -webkit-transition: -webkit-transform 0.3s;
+                transition: transform 0.3s;
+            }
+        }
+
+        .container {
+            min-height: 420px;
+            min-width: 150vh;
+            .video-feed {
+                display: grid;
+                grid-gap: 24px 16px;
+                grid-template-columns: repeat(auto-fill, minmax(164px, 1fr));
+            }
+
+            .video-liked {
+                @include flex(center, center);
+                gap: 10px;
+                flex-direction: column;
+                padding: 120px 0;
+
+                .icon {
+                    color: rgba($color: $darkColor, $alpha: 0.3);
+                    margin-bottom: 24px;
+                }
+
+                .like-title {
+                    font-size: 2.4rem;
+                    line-height: 2.8rem;
+                    font-weight: 700;
+                    margin-top: 24px;
+                }
+
+                .like-desc {
+                    margin-top: 8px;
+                    line-height: 2.2rem;
+                    color: rgba($color: $darkColor, $alpha: 0.75);
+                }
+            }
+        }
+    }
+}

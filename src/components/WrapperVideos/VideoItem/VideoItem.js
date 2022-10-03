@@ -8,8 +8,8 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 // import * as followService from '~/services/followService';
 import Button from '~/components/Button';
 
-import Linkify from 'linkify-react'
-import 'linkify-plugin-hashtag'
+import Linkify from 'linkify-react';
+import 'linkify-plugin-hashtag';
 
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import AccountPreview from '../AccountPreview/index';
@@ -32,7 +32,7 @@ function VideoItem({ data }) {
         formatHref: {
             hashtag: (href) => '/hashtag/' + href.substr(1),
         },
-    }
+    };
 
     return (
         <div className={cx('wrapper')}>
@@ -51,7 +51,7 @@ function VideoItem({ data }) {
                         </>
                     ) : (
                         <>
-                            <Button outline small className={cx('btn-follow')} >
+                            <Button outline small className={cx('btn-follow')}>
                                 Follow
                             </Button>
                         </>
@@ -70,9 +70,9 @@ function VideoItem({ data }) {
                             <p className={cx('fullname')}>{`${data.user.first_name} ${data.user.last_name}`}</p>
                             {/* .<span className={cx('time')}>{data.published_at}</span> */}
                         </Link>
-                        <Linkify className={cx("content")} options={optionsHashTag} tagName="span">
-                                {data.description}
-                            </Linkify>
+                        <Linkify className={cx('content')} options={optionsHashTag} tagName="span">
+                            {data.description}
+                        </Linkify>
                         <h4 className={cx('video-music')}>
                             <Link to="/music/nhac-nen">
                                 <FontAwesomeIcon icon={faMusic} /> Nhạc nền - {data.music}

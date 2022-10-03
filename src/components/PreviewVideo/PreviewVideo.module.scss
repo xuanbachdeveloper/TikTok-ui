@@ -1,0 +1,58 @@
+@use '../GlobalStyles/scss/' as *;
+
+.item-container {
+    cursor: pointer;
+
+    .preview {
+        position: relative;
+        width: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+
+        .size-preview {
+            padding-top: 132%;
+
+            .thumb {
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+
+                @include flex(center, center);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+
+        .views-counter {
+            @include flex(unset, center);
+            gap: 5px;
+            padding: 10px 15px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            color: $whiteColor;
+        }
+    }
+
+    .caption-line {
+        @include hideText(1);
+        padding: 2px 4px;
+    }
+}

@@ -7,12 +7,12 @@ import * as usersService from '~/services/usersService';
 
 const cx = classNames.bind(styles);
 
-function FollowingAccounts({ label}) {
+function FollowingAccounts({ label }) {
     const [data, setData] = useState([]);
     const [allFollowingUsers, setAllFollowingUsers] = useState([]);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [page] = useState(1);
-    const [seeMore, setSeeMore] = useState(false)
+    const [seeMore, setSeeMore] = useState(false);
     useEffect(() => {
         const getAcounts = async () => {
             const result = await usersService.getFollowingsList(page);
@@ -20,15 +20,14 @@ function FollowingAccounts({ label}) {
             const lessResult = result.slice(0, 5);
             setFollowingUsers(lessResult);
             setData(lessResult);
-
         };
 
         getAcounts();
     }, [page]);
 
     const handeLoadMore = async () => {
-        seeMore ? setData(followingUsers) : setData(allFollowingUsers)
-        setSeeMore(!seeMore)
+        seeMore ? setData(followingUsers) : setData(allFollowingUsers);
+        setSeeMore(!seeMore);
     };
 
     return (
@@ -40,7 +39,7 @@ function FollowingAccounts({ label}) {
             ))}
 
             <p className={cx('more-btn')} onClick={handeLoadMore}>
-            {seeMore ? '   See less' : 'See more'}
+                {seeMore ? '   See less' : 'See more'}
             </p>
         </div>
     );

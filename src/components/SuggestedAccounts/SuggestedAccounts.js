@@ -7,13 +7,13 @@ import * as usersService from '~/services/usersService';
 
 const cx = classNames.bind(styles);
 
-function SuggestedAccounts({ label}) {
+function SuggestedAccounts({ label }) {
     const [data, setData] = useState([]);
     const [allSuggestedUsers, setAllSuggestedUsers] = useState([]);
     const [suggestedUsers, setSuggestedUsers] = useState([]);
     const [page] = useState(1);
     const [perPage] = useState(15);
-    const [seeMore, setSeeMore] = useState(false)
+    const [seeMore, setSeeMore] = useState(false);
     useEffect(() => {
         const getAcounts = async () => {
             const result = await usersService.getSuggested(page, perPage);
@@ -21,15 +21,14 @@ function SuggestedAccounts({ label}) {
             const lessResult = result.slice(0, 5);
             setSuggestedUsers(lessResult);
             setData(lessResult);
-
         };
 
         getAcounts();
     }, [page, perPage]);
 
     const handeLoadMore = async () => {
-        seeMore ? setData(suggestedUsers) : setData(allSuggestedUsers)
-        setSeeMore(!seeMore)
+        seeMore ? setData(suggestedUsers) : setData(allSuggestedUsers);
+        setSeeMore(!seeMore);
     };
 
     return (
@@ -41,7 +40,7 @@ function SuggestedAccounts({ label}) {
             ))}
 
             <p className={cx('more-btn')} onClick={handeLoadMore}>
-            {seeMore ? '   See less' : 'See all'}
+                {seeMore ? '   See less' : 'See all'}
             </p>
         </div>
     );

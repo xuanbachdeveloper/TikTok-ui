@@ -55,9 +55,7 @@ const MENU_ITEMS = [
     },
 ];
 
-function Header({currentUser}) {
-
-
+function Header({ currentUser }) {
     // Handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -92,8 +90,6 @@ function Header({currentUser}) {
             separate: true,
         },
     ];
-
-
 
     return (
         <header className={cx('wrapper')}>
@@ -149,7 +145,7 @@ function Header({currentUser}) {
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
                             </button>
                         )}
-                        </Menu>
+                    </Menu>
                 </div>
             </div>
         </header>

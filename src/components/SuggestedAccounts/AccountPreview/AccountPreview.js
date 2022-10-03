@@ -8,17 +8,11 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function AccountPreview({
-    data
-}) {
+function AccountPreview({ data }) {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
-                <img
-                    className={cx('avatar')}
-                    src={data.avatar}
-                    alt=""
-                />
+                <img className={cx('avatar')} src={data.avatar} alt="" />
                 <Button className={cx('follow-btn')} primary>
                     Follow
                 </Button>
@@ -26,7 +20,7 @@ function AccountPreview({
             <div className={cx('body')}>
                 <Link to={`/@${data.nickname}`} className={cx('nickname')}>
                     <strong>{data.nickname}</strong>
-                     {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
+                    {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
                 </Link>
                 <p className={cx('name')}>{`${data.first_name} ${data.last_name}`}</p>
                 <p className={cx('analytics')}>

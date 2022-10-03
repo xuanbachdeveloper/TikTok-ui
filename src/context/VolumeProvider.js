@@ -1,11 +1,11 @@
-import { useReducer } from 'react'
-import VolumeContext from './VolumeContext'
-import VolumeReducer, { initialState } from './VolumeReducer'
+import { useReducer } from 'react';
+import VolumeContext from './VolumeContext';
+import VolumeReducer, { initialState } from './VolumeReducer';
 
 function VolumeProvider({ children }) {
-    const [state, dispatch] = useReducer(VolumeReducer, initialState)
+    const [state, dispatch] = useReducer(VolumeReducer, initialState);
 
-    return <VolumeContext.Provider value={[state, dispatch]}>{children}</VolumeContext.Provider>
+    return <VolumeContext.Provider value={[state, dispatch]}>{children}</VolumeContext.Provider>;
 }
 
-export default VolumeProvider
+export default VolumeProvider;

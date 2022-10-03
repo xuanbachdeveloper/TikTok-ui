@@ -1,4 +1,4 @@
-import Api from '~/Api/Api'
+import Api from '~/Api/Api';
 
 export const search = async (q, type = 'less') => {
     try {
@@ -7,9 +7,9 @@ export const search = async (q, type = 'less') => {
                 q,
                 type,
             },
-        })
-        return res.data
+        });
+        return res.data;
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};

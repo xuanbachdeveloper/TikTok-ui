@@ -10,7 +10,7 @@ import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
-function AccountItem({ data}) {
+function AccountItem({ data }) {
     const renderPreview = (props) => {
         return (
             <div tabIndex="-1" {...props}>

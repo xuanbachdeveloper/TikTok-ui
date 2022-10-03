@@ -1,11 +1,10 @@
-
-import WrapperVideos from '~/components/WrapperVideos'
+import WrapperVideos from '~/components/WrapperVideos';
 function Home() {
     return (
         <>
             <WrapperVideos />
         </>
-    )
+    );
 }
 
-export default Home
+export default Home;

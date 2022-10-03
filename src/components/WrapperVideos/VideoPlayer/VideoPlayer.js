@@ -6,9 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import Tippy from '@tippyjs/react/headless';
-import SharePreview from './SharePreview';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import TrackSlider from './TrackSlider';
 import VolumeSlider from './VolumeSlider';
 const cx = classNames.bind(styles);
@@ -16,19 +14,17 @@ const cx = classNames.bind(styles);
 gsap.registerPlugin(ScrollTrigger);
 
 function VideoPlayer({ data }) {
-
-
-    const renderPreview = (props) => {
-        return (
-            <div tabIndex="-1" {...props}>
-                <PopperWrapper>
-                    <SharePreview
-                        data={data}
-                    />
-                </PopperWrapper>
-            </div>
-        );
-    };
+    // const renderPreview = (props) => {
+    //     return (
+    //         <div tabIndex="-1" {...props}>
+    //             <PopperWrapper>
+    //                 <SharePreview
+    //                     data={data}
+    //                 />
+    //             </PopperWrapper>
+    //         </div>
+    //     );
+    // };
 
     const videoRef = useRef(null);
     const [videoElement, setVideoElement] = useState(null);
@@ -152,14 +148,12 @@ function VideoPlayer({ data }) {
                     </span>
                     <p className={cx('value')}>{data.comments_count}</p>
                 </button>
-                <Tippy interactive delay={[0, 200]} offset={[110, 10]} placement="bottom" render={renderPreview}>
-                    <button className={cx('action-icon-btn')}>
-                        <span className={cx('share-icon')}>
-                            <ShareIcon />
-                        </span>
-                        <p className={cx('value')}>{data.shares_count}</p>
-                    </button>
-                </Tippy>
+                <button className={cx('action-icon-btn')}>
+                    <span className={cx('share-icon')}>
+                        <ShareIcon />
+                    </span>
+                    <p className={cx('value')}>{data.shares_count}</p>
+                </button>
             </div>
         </div>
     );

@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames/bind'
-import styles from './VolumeSlider.module.scss'
-import { VolumeIcon, VolumeOffIcon } from '~/components/Icons'
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+import styles from './VolumeSlider.module.scss';
+import { VolumeIcon, VolumeOffIcon } from '~/components/Icons';
 
-
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 
 function VolumeSlider({ percent, onValueChange, onMuted }) {
-    const [marginLeft, setMarginLeft] = useState(percent)
+    const [marginLeft, setMarginLeft] = useState(percent);
 
     useEffect(() => {
-        setMarginLeft(-(percent / 100) * 12 + 6)
-    }, [percent])
+        setMarginLeft(-(percent / 100) * 12 + 6);
+    }, [percent]);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('icon')} onClick={onMuted}>
@@ -33,12 +32,12 @@ function VolumeSlider({ percent, onValueChange, onMuted }) {
                 />
             </div>
         </div>
-    )
+    );
 }
 
 VolumeSlider.propTypes = {
     percent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onValueChange: PropTypes.func,
-}
+};
 
-export default VolumeSlider
+export default VolumeSlider;

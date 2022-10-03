@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Header from '~/layouts/components/Header';
@@ -8,6 +8,10 @@ import styles from './DefaultLayout.module.scss';
 const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
+    const { nickname } = useParams();
+    var ProfileMargin = nickname === undefined ? '' : '250px';
+    var ProfileWidth = nickname === undefined ? '' : '1000px';
+    var HomeStyle = nickname === undefined ? 'center' : '';
     const [currentUser, setcurrentUser] = useState();
 
     useEffect(() => {
@@ -15,12 +19,14 @@ function DefaultLayout({ children }) {
         setcurrentUser(items);
     }, []);
     return (
-        <div className={cx('wrapper')}>
+        <div style={{ alignItems: HomeStyle }} className={cx('wrapper')}>
             <Header currentUser={currentUser} />
             <div className={cx('container')}>
                 <Sidebar currentUser={currentUser} className={cx('sidebar')} />
 
-                <div className={cx('content')}>{children}</div>
+                <div style={{ marginLeft: ProfileMargin, width: ProfileWidth }} className={cx('content')}>
+                    {children}
+                </div>
             </div>
         </div>
     );
