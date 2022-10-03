@@ -23,6 +23,7 @@ const cx = classNames.bind(styles);
 function Sidebar({ currentUser }) {
     const { nickname } = useParams();
     var SidebarStyle = nickname === undefined ? '' : '250px';
+    var loginBtnStyle = nickname === undefined ? '' : '210px';
     return (
         <aside
             style={{
@@ -52,9 +53,9 @@ function Sidebar({ currentUser }) {
             ) : (
                 <>
                     {' '}
-                    <div className={cx('currentUser-login')}>
+                    <div  className={cx('currentUser-login')}>
                         <p className={cx('text-primary')}>Log in to follow creators, like videos, and view comments.</p>
-                        <Button primary className={cx('primary-btn')}>
+                        <Button style={{width: loginBtnStyle}} primary className={cx('primary-btn')}>
                             Log in
                         </Button>
                     </div>

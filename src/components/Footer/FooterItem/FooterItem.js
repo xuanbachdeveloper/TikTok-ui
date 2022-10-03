@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 function FooterItem({ text }) {
     return (
         <div className={cx('footer-item')}>
-            <Link to={cx('footer-item')}>{text}</Link>
+            <Link to={'/'} className={cx('footer-item')}>{text}</Link>
         </div>
     );
 }

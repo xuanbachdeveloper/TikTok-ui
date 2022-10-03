@@ -20,7 +20,7 @@ function Footer() {
             <FooterItem text="Privacy" />
             <FooterItem text="Creator" />
             <FooterItem text="PortalCommunity Guidelines" />
-            <div className={cx('footer-copyright')}>© 2022 TikTok</div>
+            <p className={cx('footer-copyright')}>© 2022 TikTok</p>
         </footer>
     );
 }
