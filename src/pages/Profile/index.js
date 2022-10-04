@@ -53,7 +53,7 @@ function Profile() {
                     <div className={cx('title')}>
                         <h3 className={cx('nickname')}>
                             <span>{data.nickname}</span>
-                            {data.tick && <FontAwesomeIcon icon={faCheckCircle} />}
+                            {data.tick && <FontAwesomeIcon className={cx('tick')} icon={faCheckCircle} />}
                         </h3>
                         <h1 className={cx('username')}>{`${data.first_name} ${data.last_name}`}</h1>
                         {data.is_followed ? (
