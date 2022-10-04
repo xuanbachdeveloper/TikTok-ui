@@ -3,9 +3,11 @@ import classNames from 'classnames/bind';
 import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { CommentIcon, HeartIcon, ShareIcon } from '~/components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import Tippy from '@tippyjs/react/headless';
+import useElementOnScreen from '~/hooks/useElementOnScreen';
+
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import TrackSlider from './TrackSlider';
 import VolumeSlider from './VolumeSlider';
@@ -13,21 +15,12 @@ const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
-function VideoPlayer({ data }) {
-    // const renderPreview = (props) => {
-    //     return (
-    //         <div tabIndex="-1" {...props}>
-    //             <PopperWrapper>
-    //                 <SharePreview
-    //                     data={data}
-    //                 />
-    //             </PopperWrapper>
-    //         </div>
-    //     );
-    // };
-
+function VideoPlayer({ data, isVisibile }) {
     const videoRef = useRef(null);
     const [videoElement, setVideoElement] = useState(null);
+    const [wrapperElement, setWrapperElement] = useState(null)
+    const wrapperRef = useRef(null)
+
 
     const [duration, setDuration] = useState(data.meta.playtime_seconds);
 
@@ -37,17 +30,52 @@ function VideoPlayer({ data }) {
     const [timeDuration, setTimeDuration] = useState(data.meta.playtime_strings);
     const [currentTime, setCurrentTime] = useState('00:00');
     const [isPlaying, setIsPlaying] = useState(false);
+    const [ratioVideo, setRatioVideo] = useState()
 
-    const [ratioVideo] = useState(() => data.meta.video.resolution_x / data.meta.video.resolution_y);
+    useEffect(() => {
+        const ratio = data.meta.video.resolution_x / data.meta.video.resolution_y
+        setRatioVideo(ratio)
+        setWrapperElement(wrapperRef.current)
+        setVideoElement(videoRef.current)
+    }, [data, isVisibile])
+    const play = useCallback(() => {
+        if (videoElement) {
+            videoElement.play()
+        }
+        setIsPlaying(true)
+    }, [videoElement])
+
+    const pause = useCallback(() => {
+        if (videoElement) videoElement.pause()
+        setIsPlaying(false)
+    }, [videoElement])
+
+    useEffect(() => {
+        if (wrapperElement)
+            if (videoElement) {
+                if (isVisibile) {
+                    if (!isPlaying) {
+                        play()
+                    }
+                } else {
+                    if (isPlaying) {
+                        pause()
+                    }
+                }
+            }
+    }, [isVisibile, wrapperElement, videoElement])
 
     useEffect(() => {
         setVideoElement(videoRef.current);
     }, []);
 
     const togglePlay = () => {
-        setIsPlaying(!isPlaying);
-        videoRef.current.paused ? videoRef.current.play() : videoRef.current.pause();
-    };
+        if (isPlaying) {
+            pause()
+        } else {
+            play()
+        }
+    }
 
     const handleBtnPlay = () => {
         togglePlay();
@@ -81,7 +109,6 @@ function VideoPlayer({ data }) {
         const duraS = Math.floor(videoElement.duration % 60);
         setDuration(() => videoElement.duration);
         setTimeDuration(() => `${duraM < 10 ? `0${duraM}` : duraM}:${duraS < 10 ? `0${duraS}` : duraS}`);
-        // console.log(videoElement.videoWidth / videoElement.videoHeight)
     };
 
     const handleTimeUpdate = () => {
@@ -100,7 +127,7 @@ function VideoPlayer({ data }) {
     const sizeVideo = styles.sizeVideo;
 
     return (
-        <div className={cx('container')}>
+        <div className={cx('container')} ref={wrapperRef}>
             <div className={cx('video-container')}>
                 <video
                     ref={videoRef}
@@ -116,7 +143,7 @@ function VideoPlayer({ data }) {
                     <source src={data.file_url} type="video/mp4" />
                 </video>
                 <div className={cx('controls')}>
-                    <button className={cx('btn-play')} onClick={handleBtnPlay}>
+                <button className={cx('btn-play')} onClick={handleBtnPlay}>
                         <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
                     </button>
                     <div className={cx('volume')}>

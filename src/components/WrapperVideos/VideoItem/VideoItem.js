@@ -1,11 +1,11 @@
-// import React, { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styles from './VideoItem.module.scss';
 import classNames from 'classnames/bind';
 import { faMusic, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-// import * as followService from '~/services/followService';
+import useElementOnScreen from '~/hooks/useElementOnScreen'
 import Button from '~/components/Button';
 
 import Linkify from 'linkify-react';
@@ -34,8 +34,26 @@ function VideoItem({ data }) {
         },
     };
 
+    const wrapperRef = useRef(null)
+
+    const [wrapperElement, setWrapperElement] = useState(null)
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1,
+    }
+
+    const isVisibile = useElementOnScreen(options, wrapperRef)
+
+    useEffect(() => {
+        setWrapperElement(wrapperRef.current)
+        return () => {}
+    }, [])
+
+
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper')} ref={wrapperRef}>
             <Tippy interactive delay={[800, 200]} offset={[125, 10]} placement="bottom" render={renderPreview}>
                 <Link to={`/@${data.user.nickname}`} className={cx('link-avatar')}>
                     <Image className={cx('user-avatar')} src={data.user.avatar} alt={data.user.nickname} />
@@ -80,7 +98,7 @@ function VideoItem({ data }) {
                         </h4>
                     </div>
                 </header>
-                <VideoPlayer data={data} />
+                <VideoPlayer data={data} isVisibile={isVisibile}/>
             </div>{' '}
         </div>
     );
