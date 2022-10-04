@@ -133,6 +133,7 @@ function VideoPlayer({ data, isVisibile }) {
                     ref={videoRef}
                     className={cx('video-player')}
                     loop
+                    muted={muted}
                     onLoadedMetadata={handleLoadedVideo}
                     onTimeUpdate={handleTimeUpdate}
                     style={{
