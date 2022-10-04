@@ -25,7 +25,7 @@ function VideoPlayer({ data, isVisibile }) {
     const [duration, setDuration] = useState(data.meta.playtime_seconds);
 
     const [percentDurationSlider, setPercentDurationSlider] = useState(0);
-    const [percentVolumeSlider, setPercentVolumeSlider] = useState(100);
+    const [percentVolumeSlider, setPercentVolumeSlider] = useState(0);
     const [lastPercentVolumeSlider, setLastPercentVolumeSlider] = useState(0);
     const [timeDuration, setTimeDuration] = useState(data.meta.playtime_strings);
     const [currentTime, setCurrentTime] = useState('00:00');
@@ -133,7 +133,7 @@ function VideoPlayer({ data, isVisibile }) {
                     ref={videoRef}
                     className={cx('video-player')}
                     loop
-                    muted={muted}
+                    muted={true}
                     onLoadedMetadata={handleLoadedVideo}
                     onTimeUpdate={handleTimeUpdate}
                     style={{
