@@ -5,28 +5,28 @@ import { CommentIcon, HeartIcon, ShareIcon } from '~/components/Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
-import Tippy from '@tippyjs/react/headless';
-import useElementOnScreen from '~/hooks/useElementOnScreen';
+
 
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import TrackSlider from './TrackSlider';
 import VolumeSlider from './VolumeSlider';
+import { actions, useVolumeStore } from '~/context'
+
 const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
 function VideoPlayer({ data, isVisibile }) {
+
+    const [state, dispatch] = useVolumeStore()
+
     const videoRef = useRef(null);
     const [videoElement, setVideoElement] = useState(null);
     const [wrapperElement, setWrapperElement] = useState(null)
     const wrapperRef = useRef(null)
-
-
+    const { muted, volume, prevVolume } = state
     const [duration, setDuration] = useState(data.meta.playtime_seconds);
-
     const [percentDurationSlider, setPercentDurationSlider] = useState(0);
-    const [percentVolumeSlider, setPercentVolumeSlider] = useState(0);
-    const [lastPercentVolumeSlider, setLastPercentVolumeSlider] = useState(0);
     const [timeDuration, setTimeDuration] = useState(data.meta.playtime_strings);
     const [currentTime, setCurrentTime] = useState('00:00');
     const [isPlaying, setIsPlaying] = useState(false);
@@ -62,12 +62,14 @@ function VideoPlayer({ data, isVisibile }) {
                         pause()
                     }
                 }
-            }
+            }// eslint-disable-next-line
     }, [isVisibile, wrapperElement, videoElement])
 
     useEffect(() => {
         setVideoElement(videoRef.current);
     }, []);
+
+
 
     const togglePlay = () => {
         if (isPlaying) {
@@ -81,28 +83,81 @@ function VideoPlayer({ data, isVisibile }) {
         togglePlay();
     };
 
+
+
+    useEffect(() => {
+        if (videoElement) {
+            videoElement.volume = volume / 100
+            videoElement.muted = muted
+        }
+    }, [volume, muted, videoElement])
+
+    const handleValueVolumeChange = (e) => {
+        const currentVolume = parseInt(e.target.value)
+        if (currentVolume === 0) {
+            dispatch(actions.turnOffVolume())
+        } else {
+            dispatch(actions.turnOnVolume())
+        }
+        dispatch(actions.setVolume(currentVolume))
+
+        // videoElement.volume = currentVolume / 100
+    }
+    const handleMuted = useCallback(() => {
+        if (muted) {
+            if (prevVolume === 0) {
+                const defaultVolume = 90
+                dispatch(actions.setVolume(defaultVolume))
+            } else {
+                dispatch(actions.turnOnVolume())
+            }
+        } else {
+            dispatch(actions.turnOffVolume())
+        }
+
+        return muted
+    }, [prevVolume, muted, dispatch])
+
+    // useEffect(() => {
+    //     const handKeyDown = (e) => {
+    //         if (e.keyCode === 77) {
+    //             handleMuted()
+    //         }
+    //     }
+
+    //     const handleFocusWindow = () => {
+    //         play()
+    //     }
+
+    //     const handleBlurWindow = () => {
+    //         pause()
+    //     }
+
+    //     window.addEventListener('focus', handleFocusWindow)
+
+    //     window.addEventListener('blur', handleBlurWindow)
+
+    //     document.addEventListener('keydown', handKeyDown)
+
+    //     return () => {
+    //         document.removeEventListener('keydown', handKeyDown)
+
+    //         window.removeEventListener('focus', handleFocusWindow)
+
+    //         window.removeEventListener('blur', handleBlurWindow)
+    //     }
+    // }, [handleMuted])
+
     const handleValueTrackChange = (e) => {
         const percent = parseInt(e.target.value);
         videoElement.currentTime = (percent * videoElement.duration) / 100;
         setPercentDurationSlider(e.target.value);
     };
 
-    const handleValueVolumeChange = (e) => {
-        const currentVolume = parseInt(e.target.value);
-        if (currentVolume > 0) videoElement.muted = false;
-        setPercentVolumeSlider(() => currentVolume);
-        videoElement.volume = currentVolume / 100;
-    };
 
-    const handleMuted = () => {
-        if (videoElement.muted) {
-            setPercentVolumeSlider(lastPercentVolumeSlider);
-        } else {
-            setLastPercentVolumeSlider(videoElement.volume * 100);
-            setPercentVolumeSlider(0);
-        }
-        videoElement.muted = !videoElement.muted;
-    };
+
+
+
 
     const handleLoadedVideo = () => {
         const duraM = Math.floor(videoElement.duration / 60);
@@ -117,8 +172,7 @@ function VideoPlayer({ data, isVisibile }) {
         const percent = (videoElement.currentTime / duration) * 100;
         setCurrentTime(
             () =>
-                `${currentTimeM < 10 ? `0${currentTimeM}` : currentTimeM}:${
-                    currentTimeS < 10 ? `0${currentTimeS}` : currentTimeS
+                `${currentTimeM < 10 ? `0${currentTimeM}` : currentTimeM}:${currentTimeS < 10 ? `0${currentTimeS}` : currentTimeS
                 }`,
         );
         setPercentDurationSlider(percent);
@@ -129,6 +183,7 @@ function VideoPlayer({ data, isVisibile }) {
     return (
         <div className={cx('container')} ref={wrapperRef}>
             <div className={cx('video-container')}>
+
                 <video
                     ref={videoRef}
                     className={cx('video-player')}
@@ -144,14 +199,12 @@ function VideoPlayer({ data, isVisibile }) {
                     <source src={data.file_url} type="video/mp4" />
                 </video>
                 <div className={cx('controls')}>
-                <button className={cx('btn-play')} onClick={handleBtnPlay}>
+                    <button className={cx('btn-play')} onClick={handleBtnPlay}>
                         <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
                     </button>
                     <div className={cx('volume')}>
                         <VolumeSlider
-                            percent={percentVolumeSlider}
-                            onValueChange={handleValueVolumeChange}
-                            onMuted={handleMuted}
+                            onValueChange={handleValueVolumeChange} onMuted={handleMuted}
                         />
                     </div>
 
