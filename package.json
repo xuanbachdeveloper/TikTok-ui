@@ -30,6 +30,7 @@
         "react-scripts": "5.0.1",
         "react-sticky-box": "^1.0.2",
         "react-waypoint": "^10.3.0",
+        "renamer": "^4.0.0",
         "web-vitals": "^3.0.1",
         "xgplayer": "^2.32.0"
     },

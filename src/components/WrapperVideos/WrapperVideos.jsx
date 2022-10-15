@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { typeVideo } from '~/Api/Api.js';
+import { typeVideo } from '~/Api/Api.jsx';
 import * as videoService from '~/services/videoService';
 import InfiniteScroll from 'react-infinite-scroller';
 

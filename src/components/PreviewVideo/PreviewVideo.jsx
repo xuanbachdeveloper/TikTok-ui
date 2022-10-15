@@ -10,6 +10,7 @@ const cx = classNames.bind(styles);
 
 function PreviewVideo({ video }) {
     const [isHover, setIsHover] = useState(false);
+    // eslint-disable-next-line
     const [videoElement, setVideoElement] = useState(null);
 
     const itemRef = useRef(null);
