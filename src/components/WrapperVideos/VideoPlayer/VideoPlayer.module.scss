@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-$sizeVideo: calc(450px + ((100vw - 768px) / 1152) * 100);
+$sizeVideo: calc(450px + ((100vw - 760px) / 1152) * 100);
 :export {
     sizeVideo: $sizeVideo;
 }
 
-.container {
+.wrapper {
     display: flex;
     margin-bottom: 30px;
 }
@@ -14,7 +14,6 @@ $sizeVideo: calc(450px + ((100vw - 768px) / 1152) * 100);
     border-radius: 10px;
     display: flex;
     justify-content: unset;
-    align-items: flex-end;
     gap: 20px;
     &-height {
         height: $sizeVideo;
@@ -80,9 +79,7 @@ $sizeVideo: calc(450px + ((100vw - 768px) / 1152) * 100);
 }
 
 .video-container {
-    // height: 100%;
     width: fit-content;
-    border-radius: 8px;
     position: relative;
     overflow: hidden;
     cursor: pointer;

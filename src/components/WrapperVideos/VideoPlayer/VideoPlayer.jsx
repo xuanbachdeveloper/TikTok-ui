@@ -6,117 +6,118 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 
-
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import TrackSlider from './TrackSlider';
 import VolumeSlider from './VolumeSlider';
-import { actions, useVolumeStore } from '~/context'
+import { actions, useVolumeStore } from '~/context';
 
 const cx = classNames.bind(styles);
 
 gsap.registerPlugin(ScrollTrigger);
 
 function VideoPlayer({ data, isVisibile }) {
-
-    const [state, dispatch] = useVolumeStore()
+    const [state, dispatch] = useVolumeStore();
 
     const videoRef = useRef(null);
     const [videoElement, setVideoElement] = useState(null);
-    const [wrapperElement, setWrapperElement] = useState(null)
-    const wrapperRef = useRef(null)
-    const { muted, volume, prevVolume } = state
+    const [wrapperElement, setWrapperElement] = useState(null);
+    const wrapperRef = useRef(null);
+    const { muted, volume, prevVolume } = state;
     const [duration, setDuration] = useState(data.meta.playtime_seconds);
     const [percentDurationSlider, setPercentDurationSlider] = useState(0);
     const [timeDuration, setTimeDuration] = useState(data.meta.playtime_strings);
     const [currentTime, setCurrentTime] = useState('00:00');
     const [isPlaying, setIsPlaying] = useState(false);
-    const [ratioVideo, setRatioVideo] = useState()
+    const [ratioVideo, setRatioVideo] = useState();
+    const [classSize, setClassSize] = useState(null);
 
     useEffect(() => {
-        const ratio = data.meta.video.resolution_x / data.meta.video.resolution_y
-        setRatioVideo(ratio)
-        setWrapperElement(wrapperRef.current)
-        setVideoElement(videoRef.current)
-    }, [data, isVisibile])
+        const ratio = data.meta.video.resolution_x / data.meta.video.resolution_y;
+        setRatioVideo(ratio);
+        setClassSize(ratio < 1 ? 'wrapper-height' : 'wrapper-width');
+        setWrapperElement(wrapperRef.current);
+        setVideoElement(videoRef.current);
+    }, [data, isVisibile]);
+
+    const classes = cx('wrapper', {
+        [classSize]: classSize,
+    });
+
     const play = useCallback(() => {
         if (videoElement) {
-            videoElement.play()
+            videoElement.play();
         }
-        setIsPlaying(true)
-    }, [videoElement])
+        setIsPlaying(true);
+    }, [videoElement]);
 
     const pause = useCallback(() => {
-        if (videoElement) videoElement.pause()
-        setIsPlaying(false)
-    }, [videoElement])
+        if (videoElement) videoElement.pause();
+        setIsPlaying(false);
+    }, [videoElement]);
 
     useEffect(() => {
         if (wrapperElement)
             if (videoElement) {
                 if (isVisibile) {
                     if (!isPlaying) {
-                        play()
+                        play();
                     }
                 } else {
                     if (isPlaying) {
-                        pause()
+                        pause();
                     }
                 }
-            }// eslint-disable-next-line
-    }, [isVisibile, wrapperElement, videoElement])
+            } // eslint-disable-next-line
+    }, [isVisibile, wrapperElement, videoElement]);
 
     useEffect(() => {
         setVideoElement(videoRef.current);
     }, []);
 
-
-
     const togglePlay = () => {
         if (isPlaying) {
-            pause()
+            pause();
         } else {
-            play()
+            play();
         }
-    }
+    };
 
     const handleBtnPlay = () => {
         togglePlay();
     };
 
-
-
     useEffect(() => {
         if (videoElement) {
-            videoElement.volume = volume / 100
-            videoElement.muted = muted
+            videoElement.volume = volume / 100;
+            videoElement.muted = muted;
         }
-    }, [volume, muted, videoElement])
+    }, [volume, muted, videoElement]);
 
     const handleValueVolumeChange = (e) => {
-        const currentVolume = parseInt(e.target.value)
+        const currentVolume = parseInt(e.target.value);
         if (currentVolume === 0) {
-            dispatch(actions.turnOffVolume())
+            dispatch(actions.turnOffVolume());
         } else {
-            dispatch(actions.turnOnVolume())
+            dispatch(actions.turnOnVolume());
         }
-        dispatch(actions.setVolume(currentVolume))
+        dispatch(actions.setVolume(currentVolume));
 
         // videoElement.volume = currentVolume / 100
-    }
+    };
     const handleMuted = useCallback(() => {
         if (muted) {
             if (prevVolume === 0) {
-                const defaultVolume = 90
-                dispatch(actions.setVolume(defaultVolume))
+                const defaultVolume = 90;
+                dispatch(actions.setVolume(defaultVolume));
             } else {
-                dispatch(actions.turnOnVolume())
+                dispatch(actions.turnOnVolume());
             }
         } else {
-            dispatch(actions.turnOffVolume())
+            dispatch(actions.turnOffVolume());
         }
 
-        return muted
-    }, [prevVolume, muted, dispatch])
+        return muted;
+    }, [prevVolume, muted, dispatch]);
 
     // useEffect(() => {
     //     const handKeyDown = (e) => {
@@ -154,11 +155,6 @@ function VideoPlayer({ data, isVisibile }) {
         setPercentDurationSlider(e.target.value);
     };
 
-
-
-
-
-
     const handleLoadedVideo = () => {
         const duraM = Math.floor(videoElement.duration / 60);
         const duraS = Math.floor(videoElement.duration % 60);
@@ -172,7 +168,8 @@ function VideoPlayer({ data, isVisibile }) {
         const percent = (videoElement.currentTime / duration) * 100;
         setCurrentTime(
             () =>
-                `${currentTimeM < 10 ? `0${currentTimeM}` : currentTimeM}:${currentTimeS < 10 ? `0${currentTimeS}` : currentTimeS
+                `${currentTimeM < 10 ? `0${currentTimeM}` : currentTimeM}:${
+                    currentTimeS < 10 ? `0${currentTimeS}` : currentTimeS
                 }`,
         );
         setPercentDurationSlider(percent);
@@ -181,9 +178,14 @@ function VideoPlayer({ data, isVisibile }) {
     const sizeVideo = styles.sizeVideo;
 
     return (
-        <div className={cx('container')} ref={wrapperRef}>
-            <div className={cx('video-container')}>
-
+        <div className={classes} ref={wrapperRef}>
+            <div
+                className={cx('video-container')}
+                style={{
+                    width: ratioVideo < 1 ? `calc(${sizeVideo}*${ratioVideo})` : '',
+                    height: ratioVideo > 1 ? `calc(${sizeVideo}/${ratioVideo})` : '',
+                }}
+            >
                 <video
                     ref={videoRef}
                     className={cx('video-player')}
@@ -191,10 +193,6 @@ function VideoPlayer({ data, isVisibile }) {
                     muted={true}
                     onLoadedMetadata={handleLoadedVideo}
                     onTimeUpdate={handleTimeUpdate}
-                    style={{
-                        width: ratioVideo < 1 ? `calc(${sizeVideo}*${ratioVideo})` : '',
-                        height: ratioVideo > 1 ? `calc(${sizeVideo}/${ratioVideo})` : '',
-                    }}
                 >
                     <source src={data.file_url} type="video/mp4" />
                 </video>
@@ -203,9 +201,7 @@ function VideoPlayer({ data, isVisibile }) {
                         <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
                     </button>
                     <div className={cx('volume')}>
-                        <VolumeSlider
-                            onValueChange={handleValueVolumeChange} onMuted={handleMuted}
-                        />
+                        <VolumeSlider onValueChange={handleValueVolumeChange} onMuted={handleMuted} />
                     </div>
 
                     <div className={cx('duration')}>

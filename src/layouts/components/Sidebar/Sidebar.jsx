@@ -21,7 +21,7 @@ const cx = classNames.bind(styles);
 
 function Sidebar({ currentUser, layout }) {
     return (
-        <aside className={cx('wrapper')} style={{ width: layout === 'FullWidthLayout' ? '224px' : null , paddingRight: '15px'}}>
+        <aside className={cx('wrapper')} style={{ width: layout === 'FullWidthLayout' ? '224px' : null  ,paddingRight: layout === 'FullWidthLayout' ? '15px' : null}}>
             <Menu>
                 <MenuItem title="For You" to={config.routes.home} icon={<HomeIcon />} activeIcon={<HomeActiveIcon />} />
                 <MenuItem
@@ -46,7 +46,7 @@ function Sidebar({ currentUser, layout }) {
                     {' '}
                     <div className={cx('currentUser-login')}>
                         <p className={cx('text-primary')}>Log in to follow creators, like videos, and view comments.</p>
-                        <Button primary className={cx('primary-btn')}>
+                        <Button primary className={cx('primary-btn')} style={{ width: layout === 'FullWidthLayout' ? '190px' : null }}>
                             Log in
                         </Button>
                     </div>
