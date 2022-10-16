@@ -1,5 +1,4 @@
 import classNames from 'classnames/bind';
-import { useParams } from 'react-router-dom';
 
 import styles from './Sidebar.module.scss';
 import Menu, { MenuItem } from './Menu';
@@ -20,17 +19,9 @@ import Footer from '~/components/Footer';
 
 const cx = classNames.bind(styles);
 
-function Sidebar({ currentUser }) {
-    const { nickname } = useParams();
-    var SidebarStyle = nickname === undefined ? '' : '250px';
-    var loginBtnStyle = nickname === undefined ? '' : '210px';
+function Sidebar({ currentUser, layout }) {
     return (
-        <aside
-            style={{
-                width: SidebarStyle,
-            }}
-            className={cx('wrapper')}
-        >
+        <aside className={cx('wrapper')} style={{ width: layout === 'FullWidthLayout' ? '224px' : null , paddingRight: '15px'}}>
             <Menu>
                 <MenuItem title="For You" to={config.routes.home} icon={<HomeIcon />} activeIcon={<HomeActiveIcon />} />
                 <MenuItem
@@ -53,9 +44,9 @@ function Sidebar({ currentUser }) {
             ) : (
                 <>
                     {' '}
-                    <div  className={cx('currentUser-login')}>
+                    <div className={cx('currentUser-login')}>
                         <p className={cx('text-primary')}>Log in to follow creators, like videos, and view comments.</p>
-                        <Button style={{width: loginBtnStyle}} primary className={cx('primary-btn')}>
+                        <Button primary className={cx('primary-btn')}>
                             Log in
                         </Button>
                     </div>

@@ -55,7 +55,7 @@ const MENU_ITEMS = [
     },
 ];
 
-function Header({ currentUser }) {
+function Header({ currentUser, layout }) {
     // Handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -92,8 +92,8 @@ function Header({ currentUser }) {
     ];
 
     return (
-        <header className={cx('wrapper')}>
-            <div className={cx('inner')}>
+        <header className={cx('wrapper')} style={{justifyContent: layout === 'FullWidthLayout' ? 'space-between' : null,}}>
+            <div className={cx('inner')} style={{width: layout === 'FullWidthLayout' ? '100%' : null,}}>
                 <Link to={config.routes.home} className={cx('logo-link')}>
                     <img src={images.logo} alt="Tiktok" />
                 </Link>
