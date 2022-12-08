@@ -12,7 +12,8 @@ const cx = classNames.bind(styles);
 
 function WrapperVideos() {
     const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(Math.floor(Math.random() * 20));
+    //random page
 
     const getVideos = async () => {
         const result = await videoService.videosList(typeVideo.forYou, page);
